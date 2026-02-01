@@ -1,339 +1,119 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corrigé Intégral - Dossier Réponse CRJ 200</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --aero-blue: #1c2833;
-            --aero-red: #a93226;
-            --bg-light: #ffffff;
-            --border-color: #d5dbdb;
-            --answer-bg: #fdfefe;
-            --highlight: #2e86c1;
-        }
+\documentclass[11pt, a4paper]{article}
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f2f4f4;
-            margin: 0;
-            padding: 40px 20px;
-            color: #2c3e50;
-            line-height: 1.5;
-        }
+% --- UNIVERSAL PREAMBLE BLOCK ---
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage[french, bidi=basic, provide=*]{babel}
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--bg-light);
-            padding: 50px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.05);
-            border-top: 6px solid var(--aero-red);
-        }
+% Assigning fonts
+\babelfont{rm}{Noto Sans}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{color}
 
-        header {
-            text-align: center;
-            border-bottom: 2px solid var(--aero-blue);
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-        }
+% Mise en forme des titres pour une structure plus dense
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+\titleformat{\subsubsection}{\small\bfseries}{\thesubsubsection.}{0.5em}{}
 
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.85em;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #7f8c8d;
-        }
+\title{
+    \vspace{1cm}
+    \textbf{Dossier d'Expertise Technique Approfondie}\\
+    \large Analyse Morpho-Fonctionnelle et Évaluation des Performances\\
+    \Large \textbf{Pompe Hydraulique Eaton PV3-240-2G (Airbus A320)}
+    \vspace{0.5cm}
+}
+\author{Département Turbomachines - Étude Système Hydraulique ATA 29}
+\date{\today}
 
-        h1 { font-size: 1.8em; margin: 15px 0; color: var(--aero-blue); }
-        h2 { 
-            background: #2c3e50;
-            color: white;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            margin-top: 40px;
-            border-left: 8px solid var(--aero-red);
-            text-transform: uppercase;
-        }
+\begin{document}
 
-        .question-block {
-            margin: 20px 0;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
+\maketitle
 
-        .q-header {
-            background: #fdf2f2;
-            padding: 8px 15px;
-            font-weight: bold;
-            font-size: 0.9em;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-        }
+\begin{abstract}
+Ce compte rendu présente une analyse exhaustive de la pompe de génération hydraulique EDP (Engine Driven Pump) équipant la flotte Airbus A320. À travers le démontage et l'observation des organes internes, ce document explicite le rôle de chaque composant, les calculs de dimensionnement cinématique, ainsi que les stratégies de régulation de pression asservie. L'étude met en lumière l'ingénierie de précision nécessaire pour garantir une pression de 3000 psi sous des contraintes de rotation et de température extrêmes.
+\end{abstract}
 
-        .q-text { padding: 10px 15px; background: #fff; font-style: italic; font-size: 0.9em; border-bottom: 1px dashed #eee; }
+\newpage
 
-        .answer-content {
-            padding: 15px;
-            background: var(--answer-bg);
-            color: var(--highlight);
-            font-weight: 500;
-            white-space: pre-line;
-        }
+\section{Introduction et Rôle Stratégique du Système}
+La pompe hydraulique étudiée est une \textbf{Eaton PV3-240-2G}. Dans l'architecture ATA 29 de l'Airbus A320, cette pompe est l'organe moteur principal du circuit \textbf{Green} (moteur 1) ou \textbf{Yellow} (moteur 2). 
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            font-size: 0.85em;
-        }
+\subsection{Fonctions Primaires}
+\begin{itemize}
+    \item \textbf{Conversion Énergétique :} Elle transforme le couple mécanique prélevé sur l'Accessory Gear Box (AGB) en énergie hydraulique (pression $\times$ débit).
+    \item \textbf{Régulation de Puissance :} Grâce à son mécanisme de cylindrée variable, elle ajuste sa consommation de couple moteur au strict besoin des actionneurs avion.
+    \item \textbf{Fiabilité Opérationnelle :} Elle alimente les systèmes critiques tels que les servocommandes de vol (ailerons, profondeur, direction), le déploiement des trains d'atterrissage et le freinage normal.
+\end{itemize}
 
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 8px;
-            text-align: center;
-        }
+\section{Analyse des Organes d'Admission et de Transmission}
 
-        th { background: #f4f6f7; color: var(--aero-blue); }
+\subsection{L'Arbre d'Entraînement Cannelé (Drive Shaft)}
+Le premier élément visible est l'arbre central. Il présente des \textbf{cannelures (splines)} usinées avec précision.
+\paragraph{À quoi ça sert ?} Ces cannelures assurent une liaison mécanique robuste avec le pignon d'entraînement de l'AGB. Elles permettent de transmettre un couple de torsion important tout en autorisant un léger jeu axial. Ce jeu est vital pour compenser les dilatations thermiques entre le moteur et la pompe, ainsi que pour isoler les vibrations mécaniques qui pourraient fragiliser l'étanchéité de l'arbre.
 
-        .result-box {
-            display: inline-block;
-            padding: 2px 10px;
-            background: #ebf5fb;
-            border-radius: 3px;
-            font-family: 'JetBrains Mono', monospace;
-            font-weight: bold;
-        }
+\subsection{L'Impeller de Gavage (Inlet Boost Impeller)}
+Situé immédiatement après l'orifice d'entrée (\textit{Inlet Port}), on trouve une roue à ailettes centrifuges.
+\paragraph{À quoi ça sert ?} C'est une pompe de gavage interne. À la vitesse de rotation nominale (\textbf{3701,76 tr/min}), cet impeller augmente la pression statique du fluide d'environ 20 psi. 
+\paragraph{Physique de la Cavitation :} Ce boost est essentiel pour prévenir la cavitation. Lors de l'aspiration rapide des pistons, la pression pourrait descendre sous le seuil de tension de vapeur du Skydrol. L'implosion des bulles de gaz ainsi formées arracherait le métal (érosion). L'impeller garantit que les pistons sont toujours remplis de fluide dense, préservant ainsi l'intégrité du barillet.
 
-        .btn-print {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            background: var(--aero-red);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            z-index: 100;
-        }
+\section{Le Bloc de Pompage : Barillet et Pistons}
 
-        @media print {
-            .btn-print { display: none; }
-            body { background: white; padding: 0; }
-            .container { box-shadow: none; border: none; width: 100%; padding: 10px; }
-        }
-    </style>
-</head>
-<body>
+\subsection{Le Barillet en Bronze (Cylinder Block)}
+Pièce maîtresse du système, le barillet se distingue par l'utilisation d'un \textbf{alliage de bronze} haute performance.
+\paragraph{À quoi ça sert ?} Le bronze est choisi pour ses propriétés tribologiques (antifriction). En tournant contre la glace de distribution en acier, le bronze évite le grippage. Il sert également de dissipateur thermique pour les calories générées par le frottement des pistons. Sa structure multi-alésages (9 trous) permet de lisser les pulsations de pression en sortie.
 
-    <button class="btn-print" onclick="window.print()">IMPRIMER LE CORRIGÉ COMPLET</button>
+\subsection{Les Pistons à Joints Labyrinthes}
+Les 9 pistons sont en acier traité au chrome pour une dureté maximale. On observe des \textbf{rainures circulaires} sur leur circonférence.
+\paragraph{À quoi ça sert ?} Ces rainures créent une étanchéité par perte de charge, appelée \textbf{joint labyrinthe}. L'huile se loge dans ces fentes, créant un film de pression qui centre le piston dans son alésage. Cela permet une étanchéité dynamique sans aucun joint caoutchouc (qui ne supporterait pas la friction et la pression), tout en assurant une lubrification constante de la paroi.
 
-    <div class="container">
-        <header>
-            <div class="header-top">
-                <span>BTS AÉRONAUTIQUE - DOSSIER RÉPONSE CORRIGÉ</span>
-                <span>Session 2024</span>
-            </div>
-            <h1>Maintenance des Processus : BPSU CRJ-200</h1>
-        </header>
+\subsection{Les Patins (Slipper Pads) et la Liaison Rotule}
+L'extrémité de chaque piston est une rotule logée dans un patin en bronze.
+\paragraph{À quoi ça sert ?} Le patin possède un petit trou central. Une infime quantité d'huile HP est envoyée via ce canal pour créer un \textbf{film hydrostatique} entre le patin et le plateau cyclique. La force hydraulique "soulève" le patin de quelques microns : le piston glisse sans contact mécanique direct, annulant l'usure malgré la charge de 3000 psi.
 
-        <!-- PARTIE 1 -->
-        <section>
-            <h2>Partie 1 : Validation du besoin de réparation</h2>
-            
-            <div class="question-block">
-                <div class="q-header">Question 1.1 (DT1)</div>
-                <div class="q-text">Donner les six informations transmises par le BPSU et le système de recueil.</div>
-                <div class="answer-content">
-                    1. Position monitoring
-                    2. Asymmetry
-                    3. Overspeed
-                    4. Underspeed
-                    5. Direction of rotation
-                    6. Uncommanded movement
-                    
-                    Système de recueil : <strong>FECU (Flap Electronic Control Unit)</strong>.
-                </div>
-            </div>
+\section{Évaluation des Performances Cinématiques}
+L'analyse des dimensions physiques permet de quantifier la capacité de l'organe.
 
-            <div class="question-block">
-                <div class="q-header">Question 1.2</div>
-                <div class="q-text">Conséquences d'une dissymétrie de sortie de volet.</div>
-                <div class="answer-content">
-                    Apparition d'un couple de roulis important dû à la différence de portance entre les ailes. Risque de perte de contrôle directionnel et décrochage asymétrique lors du décollage ou de l'approche (basse altitude).
-                </div>
-            </div>
+\subsection{Calcul de la Cylindrée Maximale ($V_{tr}$)}
+\begin{itemize}
+    \item \textbf{Diamètre piston ($d$) :} $16,9 \text{ mm}$
+    \item \textbf{Surface ($S$) :} $\pi \times (\frac{16,9}{2})^2 \approx 224,318 \text{ mm}^2$
+    \item \textbf{Course maximale ($C$) :} $21,58 \text{ mm}$
+    \item \textbf{Nombre de pistons ($n$) :} 9
+\end{itemize}
+La cylindrée par tour est donnée par : $V_{tr} = n \times S \times C = 9 \times 224,318 \times 21,58 \approx \mathbf{43566,96 \text{ mm}^3/\text{tr}}$.
 
-            <div class="question-block">
-                <div class="q-header">Question 1.3</div>
-                <div class="q-text">Préconisation temporaire.</div>
-                <div class="answer-content">
-                    Mettre en place une inspection visuelle détaillée (Detailed Inspection) du harnais électrique du BPSU à chaque visite de type "Daily Check" ou toutes les 50 FH pour détecter d'éventuelles traces de frottement (shaffing) sur la nervure WS 285.35.
-                </div>
-            </div>
-        </section>
+\subsection{Débit Volumique Opérationnel ($Q_v$)}
+À la vitesse d'entraînement moteur de \textbf{3701,76 tr/min}, le débit théorique est de :
+$$Q_v = V_{tr} \times \omega = 43566,96 \times 3701,76 \approx \mathbf{161\,274\,423,7 \text{ mm}^3/\text{min}} \approx \mathbf{161,27 \text{ L/min}}.$$
 
-        <!-- PARTIE 2 -->
-        <section>
-            <h2>Partie 2 : Proposition d'une réparation</h2>
+\section{Architecture de la Régulation de Pression}
 
-            <div class="question-block">
-                <div class="q-header">Question 2.1 (DT2)</div>
-                <div class="q-text">Décrire la solution de mise en position (MIP) du canon de perçage.</div>
-                <div class="answer-content">
-                    Le gabarit (Drill Jig) est fixé sur la nervure en utilisant les 3 trous de fixation du BPSU. Un <strong>alignment tool (4)</strong> est inséré dans le guide du canon de perçage et engagé dans le trou existant de 0,625 pouce pour garantir la concentricité. On aligne les repères visuels sur l'outil et le gabarit avant le serrage final des écrous.
-                </div>
-            </div>
+\subsection{Le Plateau Cyclique Pivotant (Yoke)}
+Le plateau est la surface de réaction sur laquelle s'appuient les pistons.
+\paragraph{À quoi ça sert ?} Son inclinaison définit la course des pistons. S'il est très incliné, la pompe est à plein débit. S'il est perpendiculaire à l'axe (angle $0^\circ$), les pistons ne font plus de va-et-vient dans le barillet : le débit est nul.
 
-            <div class="question-block">
-                <div class="q-header">Question 2.2</div>
-                <div class="q-text">Calcul des cotes X1 et Y1 du gabarit.</div>
-                <div class="answer-content">
-                    Le diamètre est de 78 mm, soit un rayon R = 39 mm. L'angle entre les trous est de 120°.
-                    X1 = 39 × sin(60°) = <span class="result-box">33,77 mm</span>
-                    Y1 = 39 × cos(60°) = <span class="result-box">19,50 mm</span>
-                </div>
-            </div>
+\subsection{Le Gros Ressort de Rappel (3000 psi)}
+Visible lors du démontage, c'est un ressort hélicoïdal de forte section.
+\paragraph{À quoi ça sert ?} Il maintient la pompe en position "plein débit" par défaut. C'est une sécurité aéronautique : en cas de perte de signal de contrôle, la pompe revient mécaniquement à son débit maximum pour garantir la disponibilité des commandes de vol.
 
-            <div class="question-block">
-                <div class="q-header">Question 2.4 & 2.5 (DT3)</div>
-                <div class="q-text">Intérêt de l'Alodine, risques et protections.</div>
-                <div class="answer-content">
-                    <strong>Intérêt :</strong> Protection contre la corrosion par chromatation tout en maintenant une conductivité électrique de surface.
-                    <strong>Risques :</strong> Produit cancérogène (Chrome hexavalent), risque de sensibilisation cutanée et toxicité par inhalation.
-                    <strong>Protections :</strong> Gants étanches (nitrile), lunettes de protection, masque de protection respiratoire si ventilation insuffisante, blouse.
-                </div>
-            </div>
+\subsection{Le Compensateur de Pression (Compensator Valve)}
+Ce tiroir hydraulique compare la pression de sortie à la force du ressort.
+\paragraph{À quoi ça sert ?} C'est le "cerveau" de la pompe. Quand la pression atteint 2900 psi, il commence à dévier l'huile vers l'actuateur. À 3000 psi, l'actuateur écrase le ressort et réduit l'angle du plateau. La pompe cesse de débiter mais garde le circuit sous tension, économisant ainsi des dizaines de chevaux-vapeur au moteur.
 
-            <div class="question-block">
-                <div class="q-header">Question 2.6 (DT4)</div>
-                <div class="q-text">Avantages du marqueur (coating pen).</div>
-                <div class="answer-content">
-                    1. Application précise (réduit la consommation de produits chimiques).
-                    2. Pas de rinçage nécessaire (technologie dry-in-place).
-                    3. Pas de génération de déchets secondaires (pas de pinceaux ou de chiffons souillés).
-                    4. Facilité d'utilisation dans les zones difficiles d'accès.
-                </div>
-            </div>
-        </section>
+\section{Distribution et Drainage du Carter}
 
-        <!-- PARTIE 3 -->
-        <section>
-            <h2>Partie 3 : Gamme de perçage (Gamme opératoire)</h2>
-            <div class="question-block">
-                <div class="q-header">Question 3.1 (DT2 & DT5)</div>
-                <div class="answer-content">
-                    <table>
-                        <tr><th>Phase</th><th>Opération</th><th>Outillage / Ingrédients</th></tr>
-                        <tr><td>10</td><td>Nettoyage et préparation de la zone (WS 285.35)</td><td>Solvant approuvé</td></tr>
-                        <tr><td>20</td><td>Installation du gabarit DJIG 27-113-1 et alignement</td><td>Alignment tool, écrous, rondelles</td></tr>
-                        <tr><td>30</td><td>Perçage à l'aide de la scie cloche (Hole saw)</td><td>Perceuse, Hole saw 108, Boelube</td></tr>
-                        <tr><td>40</td><td>Ebavurage et contrôle dimensionnel</td><td>Ebavureur manuel</td></tr>
-                        <tr><td>50</td><td>Contrôle non destructif par ressuage (Type II)</td><td>Kit ressuage (NDTM 51-20-08)</td></tr>
-                        <tr><td>60</td><td>Traitement de surface à l'Alodine 1132</td><td>Coating Pen (Alodine)</td></tr>
-                        <tr><td>70</td><td>Identification de la nervure (PN 601R10033-2501)</td><td>Marqueur indélébile, vernis PU</td></tr>
-                    </table>
-                </div>
-            </div>
-        </section>
+\subsection{La Glace de Distribution (Valve Plate)}
+C'est le disque fixe avec deux fentes en forme de haricots, situé à l'arrière du barillet.
+\paragraph{À quoi ça sert ?} Elle assure la commutation hydraulique. En tournant, chaque piston passe devant le haricot d'aspiration (il recule et se remplit), puis devant le haricot de refoulement (il avance et comprime l'huile). La finition miroir de cette pièce est critique pour l'étanchéité HP.
 
-        <!-- PARTIE 4 -->
-        <section>
-            <h2>Partie 4 : Rentabilité et Fiabilité</h2>
-            
-            <div class="question-block">
-                <div class="q-header">Question 4.1 & 4.2 (DT6)</div>
-                <div class="answer-content">
-                    <strong>Implication MEL :</strong> Les BPSU ne sont pas dans la MEL (Minimum Equipment List). Toute défaillance entraîne l'immobilisation au sol (No-Go).
-                    <strong>Nombre de vols retenus :</strong> 8 640 vols (correspondant aux 8 640 cycles de vol rapportés).
-                </div>
-            </div>
+\subsection{Le Case Drain (Orifice de Drainage)}
+On remarque un orifice noté "DRAIN" sur le carter extérieur.
+\paragraph{À quoi ça sert ?} Toute l'huile de fuite (celle servant à lubrifier les patins et les barillets) remplit le corps de pompe. Si cette huile restait emprisonnée, elle monterait en température par friction. Le Case Drain permet à cette huile de s'échapper vers le réservoir, emportant avec elle les calories excédentaires, agissant ainsi comme un circuit de refroidissement.
 
-            <div class="question-block">
-                <div class="q-header">Question 4.3 : Dispatch Reliability</div>
-                <div class="answer-content">
-                    Taux de fiabilité (Compagnie) = 100% × (1 - (75 retards + 15 annulations) / 8640) = <span class="result-box">98,96%</span>.
-                    Schedule Completion Rate = 100% × (1 - 15 / 8640) = <span class="result-box">99,83%</span>.
-                    <em>Analyse : La gestion des annulations est meilleure que la moyenne mondiale (99,83 vs 99,60), mais les retards techniques impactent lourdement la ponctualité.</em>
-                </div>
-            </div>
+\section{Conclusion Technique}
+L'étude de la pompe Eaton PV3-240-2G met en évidence une intégration remarquable de solutions mécaniques et hydrauliques. De l'étage de gavage protégeant contre la cavitation à la régulation hydrostatique des patins de pistons, chaque détail géométrique observé lors du TP répond à une exigence de fiabilité et de performance. Le passage d'un mode plein débit à une cylindrée nulle permet à l'Airbus A320 de disposer d'une puissance hydraulique colossale tout en optimisant son bilan énergétique global.
 
-            <div class="question-block">
-                <div class="q-header">Question 4.7 : Calculs de fiabilité BPSU-9 (N-1)</div>
-                <div class="answer-content">
-                    Heures de vol totales (Flotte) = 9 504 FH. Quantité BPSU = 2 par avion.
-                    MTBF = (9504 × 2) / 16 = <span class="result-box">1188 FH</span>
-                    MTBUR = (9504 × 2) / 22 = <span class="result-box">864 FH</span>
-                    NFF = (1 - (864 / 1188)) × 100 = <span class="result-box">27,3%</span>
-                    DMC Atelier = (8000 / 1188) + (0,273 × (1200 / 864)) = <span class="result-box">7,11 €/FH</span>
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="q-header">Question 4.13 : Coûts de Retrofit</div>
-                <div class="answer-content">
-                    6 avions × 2 BPSU/avion × 14 500 € = <span class="result-box">174 000 €</span>.
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="q-header">Question 4.18 : Rentabilité</div>
-                <div class="answer-content">
-                    En année N, l'investissement est lourd (Retrofits + Immobilisation). Cependant, le gain d'exploitation (réduction des retards/annulations de 3 fois) et la baisse du DMC atelier permettent une rentabilité dès l'année <span class="result-box">N+1</span>.
-                </div>
-            </div>
-        </section>
-
-        <!-- PARTIE 5 -->
-        <section>
-            <h2>Partie 5 : Planning de Maintenance</h2>
-            
-            <div class="question-block">
-                <div class="q-header">Question 5.1</div>
-                <div class="answer-content">
-                    L'avion a volé 1 584 FH l'an dernier.
-                    Check A toutes les 500 FH -> 1584 / 500 = <span class="result-box">3 Check A</span> à prévoir.
-                    Check C : La dernière a été faite à 25 000 FH. Prochaine à 30 000 FH.
-                    Potentiel actuel : 28 392 FH. À la fin de l'année N : 28392 + 1584 = 29 976 FH. 
-                    Il faudra prévoir une <strong>Check C en toute fin d'année ou début N+1</strong>.
-                </div>
-            </div>
-        </section>
-
-        <!-- PARTIE 6 -->
-        <section>
-            <h2>Partie 6 : Navigabilité</h2>
-
-            <div class="question-block">
-                <div class="q-header">Question 6.2 : Centrage (Calcul)</div>
-                <div class="answer-content">
-                    Modification de masse : +1,36 kg à 15,24 m.
-                    Nouveau Moment = 399 828,30 + (1,36 × 15,24) = 399 849,03 kg.m.
-                    Nouvelle Masse = 19 629,50 + 1,36 = 19 630,86 kg.
-                    Nouveau CG = 399 849,03 / 19 630,86 = <span class="result-box">20,368 m</span>.
-                    Position %MAC = (20,368 - 18,875) / 3,3829 × 100 = <span class="result-box">44,13%</span>.
-                </div>
-            </div>
-
-            <div class="question-block">
-                <div class="q-header">Question 6.6</div>
-                <div class="q-text">Citer le type de document si la sécurité avait été engagée.</div>
-                <div class="answer-content">
-                    Une <strong>Consigne de Navigabilité (AD : Airworthiness Directive)</strong>, émise par l'autorité de surveillance (<strong>EASA</strong> pour l'Europe).
-                </div>
-            </div>
-        </section>
-
-        <footer style="margin-top: 50px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 20px;">
-            <p class="mono" style="font-size: 0.8em; color: #95a5a6;">CORRIGÉ TECHNIQUE OFFICIEL - MAINTENANCE CRJ 200 - BPSU SB</p>
-        </footer>
-    </div>
-</body>
-</html>
+\end{document}
