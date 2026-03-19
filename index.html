@@ -1,172 +1,116 @@
- <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .page-break { page-break-after: always; }
-        @media print {
-            .no-print { display: none; }
-            body { background: white; }
-            .content-box { box-shadow: none; border: none; }
-        }
-        .technical-text {
-            line-height: 1.8;
-            text-align: justify;
-            margin-bottom: 1.5rem;
-        }
-        .formula {
-            background: #f1f5f9;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 1.5rem 0;
-            border-left: 4px solid #2563eb;
-        }
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Réponses Sujet BTS Aéronautique - Maintenance</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: auto; padding: 20px; }
+        h1 { color: #003366; border-bottom: 2px solid #003366; }
+        h2 { color: #005599; margin-top: 30px; }
+        .question { font-weight: bold; color: #d32f2f; }
+        .reponse { margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .note { background-color: #fff3cd; border-left: 5px solid #ffeeba; padding: 10px; margin: 10px 0; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body>
 
-    <!-- Header -->
-    <header class="bg-white border-b sticky top-0 z-50 no-print">
-        <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-            <span class="font-bold text-blue-600 uppercase tracking-widest text-sm">Rapport de TP - ATA 29</span>
-            <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition">
-                Générer PDF
-            </button>
-        </div>
-    </header>
+    <h1>Examen : Étude de processus de maintenance d'aéronefs</h1>
 
-    <main class="max-w-4xl mx-auto my-12 px-12 py-16 bg-white shadow-xl rounded-lg content-box">
-        
-        <!-- Page de Titre -->
-        <header class="text-center mb-16">
-            <h1 class="text-4xl font-extrabold text-slate-900 mb-4">
-                Expertise Technologique de la Pompe Hydraulique Eaton PV3-240-2G
-            </h1>
-            <p class="text-slate-500 uppercase tracking-widest text-sm mb-8">Analyse des organes internes et régulation asservie - Airbus A320</p>
-            <div class="h-1 w-24 bg-blue-600 mx-auto mb-8"></div>
-        </header>
+    <h2>Partie 1 : Flotte A320 Air France</h2>
+    
+    <div class="reponse">
+        <p><span class="question">Question 1.1 : Qu'est-ce que le MSN d'un avion ?</span><br>
+        Le <strong>MSN (Manufacturer Serial Number)</strong> est le numéro de série unique attribué par le constructeur (Airbus) à chaque cellule d'avion lors de sa fabrication pour l'identifier de manière certaine tout au long de sa vie[cite: 78].</p>
+    </div>
 
-        <!-- Sommaire -->
-        <nav class="bg-slate-50 p-8 rounded-lg mb-16 no-print">
-            <h2 class="text-xl font-bold mb-4 border-b pb-2">Sommaire</h2>
-            <ul class="space-y-3 text-blue-700">
-                <li><a href="#introduction" class="hover:underline">1. Introduction Générale et Contexte Opérationnel</a></li>
-                <li><a href="#transmission" class="hover:underline">2. Arbre de Transmission et Liaisons Mécaniques</a></li>
-                <li><a href="#basse-pression" class="hover:underline">3. Étage Basse Pression : L'Impeller de Gavage</a></li>
-                <li><a href="#barillet" class="hover:underline">4. Le Barillet et la Tribologie des Matériaux</a></li>
-                <li><a href="#pistons" class="hover:underline">5. Les Pistons et les Liaisons Hydrostatiques</a></li>
-                <li><a href="#calculs" class="hover:underline">6. Analyse Cinématique et Calculs de Débit</a></li>
-                <li><a href="#regulation" class="hover:underline">7. Mécanisme de Régulation et Asservissement</a></li>
-                <li><a href="#conclusion" class="hover:underline">8. Conclusion et Synthèse Technique</a></li>
-            </ul>
-        </nav>
+    <div class="reponse">
+        <p><span class="question">Question 1.2 : Qu'est-ce qu'un type d'avion ?</span><br>
+        Le type désigne la famille générique de l'appareil certifiée par les autorités (ex: Famille A320)[cite: 9].</p>
+    </div>
 
-        <!-- 1. Introduction Globale -->
-        <section id="introduction" class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">1. Introduction Générale et Contexte Opérationnel</h2>
-            <div class="technical-text">
-                La pompe hydraulique étudiée est une <strong>Engine Driven Pump (EDP)</strong>, modèle Eaton PV3-240-2G, constituant l'organe moteur principal des circuits hydrauliques de l'Airbus A320. Dans l'architecture aéronautique moderne, la génération de puissance hydraulique est vitale pour le contrôle de l'aéronef. Cette pompe, accouplée directement sur le boîtier d'accessoires (AGB) du moteur, convertit l'énergie mécanique de rotation en une puissance hydraulique caractérisée par une pression de service de <strong>3000 psi</strong>.
-            </div>
-            <div class="technical-text">
-                L'importance stratégique de cet organe réside dans sa capacité à alimenter les systèmes critiques tels que les servocommandes de vol (ailerons, profondeur, direction), le train d'atterrissage et les systèmes de freinage. Contrairement à une pompe à cylindrée fixe, ce modèle utilise un plateau oscillant pour faire varier son débit en fonction de la demande des systèmes. En vol de croisière, lorsque la demande est quasi nulle, la pompe réduit sa cylindrée au minimum pour limiter l'échauffement du fluide Skydrol et économiser le couple prélevé sur le moteur. Cette expertise se propose de détailler chaque composant interne observé lors du démontage pour comprendre comment cette fiabilité extrême est atteinte sans l'usage de joints d'étanchéité classiques sur les parties mobiles à haute vitesse.
-            </div>
-        </section>
+    <div class="reponse">
+        <p><span class="question">Question 1.3 : Qu'est-ce qu'un modèle d'avion ?</span><br>
+        Le modèle est une sous-catégorie spécifique au sein d'un type, se distinguant par ses dimensions ou capacités (ex: A318, A319, A320 ou A321)[cite: 9, 36].</p>
+    </div>
 
-        <!-- 2. Arbre de Transmission -->
-        <section id="transmission" class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">2. Arbre de Transmission et Liaisons Mécaniques</h2>
-            <div class="technical-text">
-                L'examen de l'arbre d'entraînement central révèle un usinage par cannelures (Splines) de haute précision. Ces cannelures ne sont pas de simples dispositifs de transmission de couple ; elles assurent une liaison glissière-pivot avec le pignon moteur, permettant d'absorber les dilatations thermiques axiales et les vibrations mécaniques intenses du moteur. Un point crucial observé est la présence d'une "section de rupture" (shear section) : une zone de l'arbre volontairement affaiblie en diamètre. En cas de grippage interne de la pompe, cet arbre se brise mécaniquement pour protéger l'AGB d'une casse coûteuse, isolant ainsi la pompe défaillante du reste du moteur.
-            </div>
-        </section>
+    <div class="reponse">
+        <p><span class="question">Question 1.4 : Qu'est-ce que la version d'un avion ?</span><br>
+        La version définit une configuration précise de l'appareil, souvent liée à la motorisation ou à des options spécifiques (ex: A320neo avec moteurs LEAP-1A)[cite: 40, 45].</p>
+    </div>
 
-        <!-- 3. Basse Pression -->
-        <section id="basse-pression" class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">3. Étage Basse Pression : L'Impeller de Gavage</h2>
-            <div class="technical-text">
-                Le fluide hydraulique pénètre dans la pompe par un conduit d'admission de large diamètre (Inlet). À une vitesse de rotation nominale de <strong>3701,76 tr/min</strong>, l'aspiration des pistons est si brutale que la pression naturelle du réservoir ne suffirait pas à remplir les alésages sans risque de cavitation. C'est ici qu'intervient l'Impeller, une roue centrifuge fixée à l'entrée de l'arbre.
-            </div>
-            <div class="technical-text">
-                L'Impeller accélère l'huile et augmente sa pression statique d'environ 20 psi. Ce "gavage" est une protection contre la cavitation : sans lui, des bulles de vapeur se formeraient à l'admission et imploseraient violemment lors du passage en zone de haute pression, arrachant le métal du barillet. Ce premier étage garantit que les pistons travaillent toujours avec un fluide dense et sans gaz.
-            </div>
-        </section>
+    <div class="reponse">
+        <p><span class="question">Question 1.6 : Décrypter l'immatriculation d'un avion (F-GMZA) :</span><br>
+        <ul>
+            <li><strong>F</strong> : Préfixe de la France (pays d'enregistrement)[cite: 74].</li>
+            <li><strong>GMZA</strong> : Marques d'immatriculation spécifiques à l'aéronef exploitées par la compagnie.</li>
+        </ul>
+    </p>
+    </div>
 
-        <!-- 4. Barillet -->
-        <section id="barillet" class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">4. Le Barillet et la Tribologie des Matériaux</h2>
-            <div class="technical-text">
-                Le barillet est la pièce tournante principale, réalisée dans un alliage spécifique de bronze. Le choix du bronze est dicté par ses propriétés tribologiques d'exception : il présente un très faible coefficient de frottement avec l'acier traité des pistons et de la glace de distribution. Cette interface métal-sur-métal est lubrifiée en permanence par le fluide lui-même. 
-            </div>
-            <div class="technical-text">
-                L'architecture à neuf pistons permet un lissage des pulsations de pression. En effet, un nombre impair de pistons garantit qu'à tout moment, le nombre de pistons en phase de refoulement et en phase d'aspiration change de manière à minimiser les irrégularités de débit (le "ripple"), protégeant ainsi les canalisations de l'avion contre les phénomènes de résonance et de fatigue vibratoire.
-            </div>
-        </section>
+    <h2>Partie 2 & 3 : Réglementation et Applicabilité</h2>
+    
+    <div class="reponse">
+        <p><span class="question">Question 3.2 : Que se passe-t-il si un avion ne fait pas les travaux dans les délais exigés ?</span><br>
+        Si les travaux d'une <strong>AD (Airworthiness Directive)</strong> ne sont pas effectués avant la date d'échéance ou la limite de cycles/heures, le certificat de navigabilité de l'avion devient invalide. L'appareil est alors <strong>interdit de vol (AOG)</strong> jusqu'à mise en conformité[cite: 89].</p>
+    </div>
 
-        <!-- 5. Pistons -->
-        <section id="pistons" class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">5. Les Pistons et les Liaisons Hydrostatiques</h2>
-            <div class="technical-text">
-                Les pistons axiaux ne disposent d'aucun joint en élastomère pour assurer l'étanchéité à 3000 psi. Celle-ci est obtenue par un ajustement micrométrique et par la présence de rainures circulaires sur leur circonférence, agissant comme des joints labyrinthes. L'huile s'engouffre dans ces fentes et crée un film de pression qui centre le piston dans son alésage, évitant tout contact solide à haute vitesse.
-            </div>
-            <div class="technical-text">
-                À l'extrémité de chaque piston, un patin (Slipper Pad) est articulé sur une rotule. Un perçage interne traverse le piston pour amener la pression de refoulement sous le patin. Cette conception crée une poche de pression hydrostatique : le patin "vole" littéralement sur une pellicule d'huile de quelques microns au-dessus du plateau cyclique. Cette technologie annule pratiquement l'usure mécanique, malgré les charges énormes exercées par la pression de refoulement.
-            </div>
-        </section>
+    <h2>Partie 4 : Étude spécifique de l'AD 2020-0174</h2>
 
-        <!-- 6. Calculs -->
-        <section id="calculs" class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">6. Analyse Cinématique et Calculs de Débit</h2>
-            <div class="technical-text">
-                Le dimensionnement cinématique de la pompe repose sur les caractéristiques physiques des pistons et de l'inclinaison maximale du plateau. Voici le détail de l'analyse mathématique :
-            </div>
-            
-            <div class="formula">
-                <strong>Calcul de la Surface de Poussée :</strong><br>
-                Pour un diamètre de piston de d = 16,9 mm :<br>
-                S = π * (d/2)² = π * (8,45 mm)² ≈ 224,318 mm²
-            </div>
+    <div class="reponse">
+        <p><span class="question">Question 4.1 : Qu'est-ce qu'une AD ?</span><br>
+        Une <strong>AD (Airworthiness Directive)</strong>, ou Consigne de Navigabilité (CN) en français, est un document obligatoire émis par une autorité de sécurité aérienne (comme l'EASA) pour corriger une situation d'insécurité sur un produit aéronautique[cite: 48, 95].</p>
+    </div>
 
-            <div class="formula">
-                <strong>Calcul de la Cylindrée par Tour (V_tr) :</strong><br>
-                Considérant n = 9 pistons et une course maximale de C = 21,58 mm :<br>
-                V_tr = n * S * C = 9 * 224,318 mm² * 21,58 mm ≈ 43 566,96 mm³ / tour
-            </div>
+    <div class="reponse">
+        <p><span class="question">Question 4.2 : Cette AD est-elle obligatoire ?</span><br>
+        <strong>Oui</strong>, toutes les AD publiées par l'EASA revêtent un caractère impératif pour maintenir la navigabilité de l'aéronef[cite: 57].</p>
+    </div>
 
-            <div class="formula">
-                <strong>Calcul du Débit Volumique (Qv) :</strong><br>
-                À une vitesse de rotation ω = 3701,76 tr/min :<br>
-                Qv = V_tr * ω ≈ 161 274 423,7 mm³ / min<br>
-                Qv ≈ 161,27 L/min
-            </div>
-            
-            <div class="technical-text">
-                Ce débit volumique de 161,27 litres par minute à plein régime permet d'assurer des manoeuvres rapides, comme la sortie des trains d'atterrissage en moins de 10 secondes, même en présence de fortes charges aérodynamiques.
-            </div>
-        </section>
+    <div class="reponse">
+        <p><span class="question">Question 4.3 (Note : notée 4.2 dans le sujet) : Quel ATA est concerné par cette AD ?</span><br>
+        L'AD 2020-0174 concerne le train d'atterrissage principal (MLG), elle relève donc de l'<strong>ATA 32</strong>[cite: 58].</p>
+    </div>
 
-        <!-- 7. Régulation -->
-        <section id="regulation" class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">7. Mécanisme de Régulation et Asservissement</h2>
-            <div class="technical-text">
-                Le mécanisme de régulation est le "cerveau" hydraulique de la pompe. Il repose sur un équilibre de forces entre un ressort de rappel puissant et un piston actuateur. Le ressort maintient par défaut la pompe dans sa position d'inclinaison maximale (plein débit). C'est une sécurité passive : si la pression tombe, la pompe revient mécaniquement à sa cylindrée maximale pour tenter de restaurer les 3000 psi.
-            </div>
-            <div class="technical-text">
-                Lorsque la pression du circuit atteint le seuil de régulation, une partie de l'huile de refoulement est dirigée vers le piston actuateur. Ce dernier génère une force opposée au ressort, poussant le plateau cyclique vers une position plus verticale. À 3000 psi, l'angle devient quasi nul, la course des pistons est annulée, et la pompe ne produit plus que le débit de fuite interne nécessaire à sa lubrification.
-            </div>
-        </section>
+    <div class="reponse">
+        <p><span class="question">Question 4.4 : Quels systèmes sont impactés par cette AD ?</span><br>
+        Le système impacté est le <strong>Train d'Atterrissage Principal (Main Landing Gear - MLG)</strong>, spécifiquement les jambes de train et les tubes d'amortisseurs[cite: 58, 59].</p>
+    </div>
 
-        <!-- 8. Conclusion -->
-        <section id="conclusion" class="mb-16">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">8. Conclusion et Synthèse Technique</h2>
-            <div class="technical-text">
-                En conclusion, la pompe Eaton PV3-240-2G illustre parfaitement la maîtrise de la tribologie et de l'asservissement hydraulique. Chaque composant, de l'impeller centrifuge évitant la cavitation aux patins hydrostatiques annulant l'usure, est optimisé pour la sécurité aérienne. La précision des calculs de débit et la finesse de la régulation permettent à l'Airbus A320 de bénéficier d'une source de puissance fiable, capable de s'adapter instantanément aux sollicitations du pilote tout en préservant l'intégrité thermique du système.
-            </div>
-        </section>
+    <div class="reponse">
+        <p><span class="question">Question 4.6 : Y-a-t-il une ou plusieurs AD précédentes dont celle-ci est issue ?</span><br>
+        <em>Note : Selon les registres EASA, l'AD 2020-0174 remplace (supersedes) l'AD 2018-0136 datée du 26 juin 2018.</em></p>
+    </div>
 
-    </main>
+    <h2>Partie 5 : Étude de la documentation Airbus</h2>
 
-    <footer class="text-center py-12 text-slate-400 text-sm no-print">
-        <p>© 2024 - Rapport d'Expertise Maintenance Aéronautique - Maintenance A320</p>
-    </footer>
+    <div class="reponse">
+        <p><span class="question">Question 5.1 : Part numbers des pièces pour les 2 côtés (A318/319/320) :</span><br>
+        D'après le tableau fourni[cite: 59], pour les modèles A318, A319 et A320, les P/N des tubes coulissants (MLG sliding tube) peuvent être :
+        <table>
+            <tr>
+                <th>Composant</th>
+                <th>Part Numbers (P/N) disponibles</th>
+            </tr>
+            <tr>
+                <td>MLG Sliding Tube</td>
+                <td>201260302, 201260324, 201471300, 201471302, 201471301, 201471304, 201471307 [cite: 59]</td>
+            </tr>
+        </table>
+        Les pièces sont généralement symétriques ou possèdent des P/N distincts pour Gauche (LH) et Droite (RH) selon le catalogue de pièces (IPC).
+        </p>
+    </div>
+
+    <div class="reponse">
+        <p><span class="question">Question 5.2 : Quel document doit impérativement accompagner les pièces détachées ?</span><br>
+        Chaque pièce aéronautique doit être accompagnée d'un certificat de libération autorisée, généralement l'<strong>EASA Form 1</strong> (pour l'Europe) ou un document équivalent (FAA 8130-3), garantissant sa navigabilité et sa traçabilité[cite: 100].</p>
+    </div>
+
+    <div class="note">
+        <strong>Note pour le travail Excel (Q1.7 & 2.1) :</strong> Vous devez utiliser le site <em>Airfleets</em> pour extraire la liste des 116 avions et le site de l'<em>EASA</em> pour les AD parues après le 01 Août 2024[cite: 63, 77, 81].
+    </div>
 
 </body>
-</html>
+</html> 
