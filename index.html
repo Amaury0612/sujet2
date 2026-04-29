@@ -3,187 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airbus Presentation - Professional Aerospace Overview</title>
+    <title>Airbus Presentation - Oral Support</title>
     <style>
         :root {
-            --bg-dark: #050a18;
-            --card-bg: #0b1426;
             --airbus-blue: #00205b;
-            --accent-blue: #005587;
-            --text-main: #ffffff;
-            --text-dim: #b0b0b0;
+            --accent-blue: #00a3e0;
+            --text-light: #f4f4f4;
+            --bg-dark: #0a0a0a;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-dark);
-            color: var(--text-main);
+            color: var(--text-light);
             margin: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             overflow: hidden;
         }
 
-        #pres-container {
-            width: 90%;
-            max-width: 1000px;
-            background: var(--card-bg);
-            border: 1px solid #1a263f;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+        /* Slide Container */
+        .presentation-container {
+            width: 80%;
+            height: 70vh;
+            background: #111;
+            border: 2px solid #333;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
             text-align: center;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-weight: 300;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            border-left: 5px solid var(--accent-blue);
-            padding-left: 15px;
-            text-align: left;
-            min-height: 50px;
+            font-size: 3.5rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            border: 2px dashed #444;
             display: flex;
             align-items: center;
-            text-shadow: 0 0 10px rgba(255,255,255,0.1);
+            justify-content: center;
+            margin-top: 20px;
+            color: #666;
+            font-style: italic;
+            border-radius: 10px;
         }
 
-        .img-frame {
-            width: 100%;
-            height: 480px;
-            background-color: #000;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 25px;
-            border: 1px solid #1f2d4d;
-        }
-
-        .img-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .nav-bar {
+        /* Navigation Buttons */
+        .controls {
+            margin-top: 30px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #1f2d4d;
-            padding-top: 20px;
-        }
-
-        .counter {
-            font-family: monospace;
-            color: var(--text-dim);
-            font-weight: bold;
-            font-size: 1.1rem;
+            gap: 20px;
         }
 
         button {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--accent-blue);
-            padding: 10px 30px;
-            border-radius: 4px;
+            padding: 12px 25px;
+            font-size: 1rem;
             cursor: pointer;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: all 0.2s ease;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--airbus-blue);
+            color: white;
+            transition: 0.3s;
         }
 
-        button:hover:not(:disabled) {
+        button:hover {
             background-color: var(--accent-blue);
-            box-shadow: 0 0 15px rgba(0, 85, 135, 0.5);
         }
 
-        button:disabled {
-            border-color: #2a3b5a;
-            color: #2a3b5a;
-            cursor: not-allowed;
+        .btn-download {
+            background-color: #27ae60;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        /* PDF Export Styling */
+        @media print {
+            body { background: white; color: black; }
+            .controls, .btn-download { display: none; }
+            .presentation-container { 
+                width: 100%; height: auto; border: none; box-shadow: none;
+            }
+            .slide { display: block !important; page-break-after: always; }
+            h1 { color: #00205b; }
         }
     </style>
 </head>
 <body>
 
-<div id="pres-container">
-    <h1 id="slide-title">Loading...</h1>
-    
-    <div class="img-frame">
-        <img id="slide-img" src="" alt="Presentation Visual">
+    <button class="btn-download" onclick="window.print()">Download PDF</button>
+
+    <div class="presentation-container" id="presentation">
+        
+        <div class="slide active">
+            <p style="color: grey;">Technical Document: Annexe 1</p>
+            <h1>Quality Log Book: <br>Technical & Commercial Interface</h1>
+            <div class="image-placeholder">[IMAGE: QLB INTERFACE OR AIRCRAFT INSPECTION]</div>
+        </div>
+
+        <div class="slide">
+            <p style="color: grey;">Article 1: ZEROe Project</p>
+            <h1>Target 2035: <br>The Zero-Emission Ambition</h1>
+            <div class="image-placeholder">[IMAGE: HYDROGEN PLANE CONCEPT]</div>
+        </div>
+
+        <div class="slide">
+            <p style="color: grey;">Article 1: ZEROe Project</p>
+            <h1>Three Designs <br>for Versatile Aviation</h1>
+            <div class="image-placeholder">[IMAGE: THE 3 DESIGN CONCEPTS]</div>
+        </div>
+
+        <div class="slide">
+            <p style="color: grey;">Article 1: ZEROe Project</p>
+            <h1>A Global <br>Ecosystem Challenge</h1>
+            <div class="image-placeholder">[IMAGE: AIRPORT INFRASTRUCTURE]</div>
+        </div>
+
+        <div class="slide">
+            <p style="color: grey;">Article 2: 2025 Market Reality</p>
+            <h1>Supply Chain <br>Fragility & Quality Issues</h1>
+            <div class="image-placeholder">[IMAGE: ASSEMBLY LINE OR FUSELAGE PANELS]</div>
+        </div>
+
+        <div class="slide">
+            <p style="color: grey;">Article 2: 2025 Market Reality</p>
+            <h1>Massive Operational <br>Disruption Impact</h1>
+            <div class="image-placeholder">[IMAGE: LOGISTICS OR DELAY CHART]</div>
+        </div>
+
+        <div class="slide">
+            <p style="color: grey;">Article 2: 2025 Market Reality</p>
+            <h1>Execution vs. Demand: <br>The Industrial Paradox</h1>
+            <div class="image-placeholder">[IMAGE: AIRBUS BACKLOG OR DELIVERY STATS]</div>
+        </div>
+
     </div>
 
-    <div class="nav-bar">
-        <button id="prevBtn" onclick="moveSlide(-1)">Previous</button>
-        <div class="counter" id="slide-num">1 / 6</div>
-        <button id="nextBtn" onclick="moveSlide(1)">Next</button>
+    <div class="controls">
+        <button onclick="changeSlide(-1)">Previous</button>
+        <span id="slide-number">Slide 1 / 7</span>
+        <button onclick="changeSlide(1)">Next</button>
     </div>
-</div>
 
-<script>
-    const slides = [
-        // SUBJECT 1 : QLB (Quality Log Book)
-        {
-            title: "QLB: Digital Precision & Reporting",
-            img: "https://www.airbus.com/sites/g/files/jlcbta136/files/styles/w1200h675/public/2024-04/professionals_4images.jpg?h=0e6c0790&itok=HdJOVpAt"
-        },
-        {
-            title: "QLB: Validating Quality in Real-Time",
-            img: "https://www.airbus.com/sites/g/files/jlcbta136/files/styles/w750h1140/public/2024-03/saru_paid_media_production_manufacturing_2022.jpg?h=cf932d48&itok=ceBjOFDy"
-        },
-        // SUBJECT 2 : ZEROe (Hydrogen)
-        {
-            title: "ZEROe: Shaping the 2035 Hydrogen Future",
-            // RESTAURATION du lien original transmis par l'utilisateur
-            img: "https://media.lesechos.com/api/v1/images/view/654cc2c64c6ee00a9476218a/1280x720/0903343902189-web-tete.jpg"
-        },
-        {
-            title: "ZEROe: The Challenge of Global Infrastructure",
-            img: "https://www.internationalairportreview.com/wp-content/uploads/Hydrogen.jpg" 
-        },
-        // SUBJECT 3 : 2025 (State of the Industry)
-        {
-            title: "2025: Strengthening Strategic Partnerships",
-            img: "https://innovations.fr/wp-content/uploads/2025/03/airbus-signe-un-coup-majeur-avec-un-client-americain.jpeg"
-        },
-        {
-            title: "2025: Logistics & Supply Chain Fragility",
-            img: "https://www.leparisien.fr/resizer/9e62zQ-ss_JhkfbGitGaz8WpjxM=/932x582/cloudfront-eu-central-1.images.arcpublishing.com/leparisien/X2JL2OYWZRER7CSD7MIDWEAQCE.jpg"
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberText = document.getElementById('slide-number');
+
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            slideNumberText.innerText = `Slide ${currentSlide + 1} / ${slides.length}`;
         }
-    ];
 
-    let currentIndex = 0;
-
-    function renderSlide() {
-        const slide = slides[currentIndex];
-        const img = document.getElementById('slide-img');
-        
-        // Simple fade effect
-        img.style.opacity = 0;
-        
-        setTimeout(() => {
-            document.getElementById('slide-title').innerText = slide.title;
-            img.src = slide.img;
-            document.getElementById('slide-num').innerText = (currentIndex + 1) + " / " + slides.length;
-            img.style.opacity = 1;
-        }, 150);
-
-        // Update button states
-        document.getElementById('prevBtn').disabled = (currentIndex === 0);
-        document.getElementById('nextBtn').disabled = (currentIndex === slides.length - 1);
-    }
-
-    function moveSlide(direction) {
-        currentIndex += direction;
-        renderSlide();
-    }
-
-    // Initialize first slide on load
-    window.onload = renderSlide;
-</script>
-
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "ArrowRight") changeSlide(1);
+            if (e.key === "ArrowLeft") changeSlide(-1);
+        });
+    </script>
 </body>
 </html>
